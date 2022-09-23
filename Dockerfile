@@ -34,6 +34,8 @@ COPY --chown=algorithm:algorithm results/ /opt/algorithm/results/
 
 # Copy the processor to the algorithm container folder
 COPY --chown=algorithm:algorithm process.py /opt/algorithm/
+# Copy the  detection map generator to the code container folder
+COPY --chown=algorithm:algorithm nndet_generate_detection_maps.py /opt/code/nndet_generate_detection_maps.py
 
 ENTRYPOINT python -m process $0 $@
 

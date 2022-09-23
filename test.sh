@@ -2,19 +2,20 @@
 
 SCRIPTPATH="$( cd "$(dirname "$0")" ; pwd -P )"
 
-./build.sh
+# Commented out to avoid repeating building
+# ./build.sh
 
 VOLUME_SUFFIX=$(dd if=/dev/urandom bs=32 count=1 | md5sum | cut -c 1-10)
 
-DOCKER_FILE_SHARE=picai_baseline_nndetection_semi_supervised_processor-output-$VOLUME_SUFFIX
+DOCKER_FILE_SHARE=nn_det_test-output-$VOLUME_SUFFIX
 docker volume create $DOCKER_FILE_SHARE
 # you can see your output (to debug what's going on) by specifying a path instead:
-# DOCKER_FILE_SHARE="/mnt/netcache/pelvis/projects/joeran/tmp-docker-volume"
+DOCKER_FILE_SHARE="/mnt/d/Work/picai_challenge/docker_output"
 
-docker run --rm --gpus='"device=0"' \
+docker run --rm \
         -v $SCRIPTPATH/test/:/input/ \
         -v $DOCKER_FILE_SHARE:/output/ \
-        picai_baseline_nndetection_semi_supervised_processor
+        nn_det_test
 
 
 # check case_confidence (at /output/cspca-case-level-likelihood.json)

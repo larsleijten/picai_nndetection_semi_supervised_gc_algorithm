@@ -1,5 +1,5 @@
-#!/usr/bin/env bash
+#!/usr/bin/bash
 SCRIPTPATH="$( cd "$(dirname "$0")" ; pwd -P )"
-
+#picai_baseline_nndetection_semi_supervised_processor
 docker build "$SCRIPTPATH" \
-    -t picai_baseline_nndetection_semi_supervised_processor
+    -t nn_det_test
